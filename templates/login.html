@@ -1,31 +1,58 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    login
+    Grocery Good - Merchant Login
 {% endblock %}
 
 {% block body %}
-	{% if msg %}
-		<div class="container">
-			<div class="alert alert-success" role="alert">
-				{{ msg }}
-			</div>
-		</div>
-	{% endif %}
-	<div class="card" id="topdiv0">
-			<form class="px-4 py-3" method="POST" action="{{ url_for('login')}}">
-				<h5 class="card-title">Login as Merchant</h5>
-		    <div class="form-group">
-		      <label for="username">Username</label>
-		      <input type="text" required="required" class="form-control" name="username" placeholder="bob" autofocus>
-		    </div>
-		    <div class="form-group">
-		      <label for="password">Password</label>
-		      <input type="password" required="required" class="form-control" name="password" placeholder="Password">
-		    </div>
-		    <button type="submit" class="btn btn-primary">Sign in</button>
-		</form>
-		<div class="dropdown-divider"></div>
-		<a class="dropdown-item" href="{{ url_for('signup') }}">New around here? Sign up</a>
-	</div>
+    <style>
+        body {
+            background: linear-gradient(to right, #25e2cf, #e9ecef);
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        footer {
+            background: linear-gradient(to right, #28a745, #218838);
+        }
+    </style>
+
+    {% if msg %}
+        <div class="container">
+            <div class="alert alert-success" role="alert">
+                {{ msg }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card p-4" style="width: 100%; max-width: 400px;">
+            <form method="POST" action="{{ url_for('login') }}">
+                <h5 class="card-title text-center" style="color: #28a745;">Login as Merchant</h5>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" required="required" class="form-control" name="username" placeholder="Enter your username" autofocus>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="password">Password</label>
+                    <input type="password" required="required" class="form-control" name="password" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn btn-success btn-block mt-4">Sign In</button>
+            </form>
+            <div class="dropdown-divider mt-4"></div>
+            <div class="text-center">
+                <a class="dropdown-item text-success" href="{{ url_for('signup') }}">New around here? Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-3" style="background-color: #343a40; color: white;">
+        <p>&copy; 2024 Grocery Good. All rights reserved.</p>
+    </footer>
 {% endblock %}

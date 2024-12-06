@@ -1,40 +1,117 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Edit
+    Edit Product - Grocery Good
 {% endblock %}
 
 {% block body %}
-	<div class="container" id="topdiv5">
-		<h5 class="card-title">Edit your Product</h5>
-		<form action="{{ url_for('edit', pro_id = result.pro_id) }}" method="POST">
-			<div class="form-group">
-	    		<label for="exampleFormControlTextarea1">Category</label>
-	    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1"name="category" required>{{result.category}}</textarea>
-	  		</div>
-	  		<div class="form-group">
-	    		<label for="exampleFormControlTextarea1">Name</label>
-	    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="pro_name" required>{{result.name}}</textarea>
-	  		</div>
-	  		<div class="form-group">
-	    		<label for="exampleFormControlTextarea1">Description</label>
-	    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="description" required>{{result.description}}</textarea>
-	  		</div>
-			<div class="form-group">
-				<label for="exampleFormControlSelect1">Price Range</label>
-	    		<select class="form-control" name="price_range">
-	      			<option value="₹100-₹500">₹100-₹500</option>
-				    <option value="₹500-₹1000">₹500-₹1000</option>
-				    <option value="₹1000-₹2000">₹1000-₹2000</option>
-				    <option value="₹2000-₹5000">₹2000-₹5000</option>
-				    <option value="₹5000-₹10000">₹5000-₹10000</option>
-	    		</select>
-	  		</div>
-	  		<div class="form-group">
-	    		<label for="exampleFormControlTextarea1">Comments</label>
-	    		<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="comments" required>{{result.comments}}</textarea>
-	  		</div>
-	  		<button type="submit" class="btn btn-primary">Done</button>
-		</form>
-	</div>
+    <style>
+        body {
+            background: linear-gradient(to right, #25e2cf, #e9ecef);
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+        }
+        footer {
+            background: linear-gradient(to right, #28a745, #218838);
+        }
+        .form-group label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #28a745;
+        }
+        .form-control {
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #218838;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .card-title {
+            color: #28a745;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .card-body {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa;">
+        <a class="navbar-brand" href="#" style="color: #087020; font-weight: bold;">Grocery Good</a>
+        <div class="ml-auto">
+            <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('signup') }}">Are you a Merchant?</a>
+        </div>
+    </nav>
+
+    <!-- Edit Product Section -->
+    <div class="container my-5" id="topdiv5">
+        <h5 class="card-title">Edit Your Product</h5>
+        <form action="{{ url_for('edit', pro_id=result.pro_id) }}" method="POST">
+            <div class="form-group">
+                <label for="category">Category</label>
+                <textarea class="form-control" id="category" rows="1" name="category" required>{{ result.category }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="pro_name">Product Name</label>
+                <textarea class="form-control" id="pro_name" rows="1" name="pro_name" required>{{ result.name }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="1" name="description" required>{{ result.description }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="price_range">Price Range</label>
+                <select class="form-control" name="price_range" id="price_range" required>
+                    <option value="₹100-₹500" {% if result.price_range == '₹100-₹500' %}selected{% endif %}>₹100-₹500</option>
+                    <option value="₹500-₹1000" {% if result.price_range == '₹500-₹1000' %}selected{% endif %}>₹500-₹1000</option>
+                    <option value="₹1000-₹2000" {% if result.price_range == '₹1000-₹2000' %}selected{% endif %}>₹1000-₹2000</option>
+                    <option value="₹2000-₹5000" {% if result.price_range == '₹2000-₹5000' %}selected{% endif %}>₹2000-₹5000</option>
+                    <option value="₹5000-₹10000" {% if result.price_range == '₹5000-₹10000' %}selected{% endif %}>₹5000-₹10000</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea class="form-control" id="comments" rows="1" name="comments" required>{{ result.comments }}</textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Done</button>
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-3" style="background-color: #343a40; color: white;">
+        <p>&copy; 2024 Grocery Good. All rights reserved.</p>
+    </footer>
 {% endblock %}

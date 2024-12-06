@@ -1,36 +1,68 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Index
+    Grocery Good - Seller Dashboard
 {% endblock %}
 
 {% block body %}
-    <div class="container" id="topdiv6">
-        <nav class="navbar navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">Products</span>
-            <a class="my-2 my-sm-0" href="{{ url_for('signup') }}">Are you a Merchant?</a>
+    <style>
+        body {
+            background: linear-gradient(to right, #25e2cf, #e9ecef);
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+        }
+        footer {
+            background: linear-gradient(to right, #28a745, #218838);
+        }
+    </style>
+
+    <div class="container my-5" id="topdiv6">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa;">
+            <a class="navbar-brand" href="#" style="color: #087020; font-weight: bold;">Grocery Good</a>
+            <div class="ml-auto">
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url_for('signup') }}">Are you a Merchant?</a>
+            </div>
         </nav>
 
+        <!-- Products Section -->
         {% if rows %}
-            <div class="row" id="index0">
+            <h2 class="text-center my-4" style="color: #28a745;">Your Products</h2>
+            <div class="row g-4" id="index0">
                 {% for row in rows %}
-                    <div class="card needspace" style="width: 18rem;">
-                        <img src="{{ url_for('static', filename=
-                        'images/' + row.filename) }}" class="card-img-top" alt="Product Image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ row.name }}</h5>
-                            <p class="card-text">{{ row.category }}</p>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm" style="border: none;">
+                            <img src="{{ url_for('static', filename='images/' + row.filename) }}" class="card-img-top" alt="Product Image" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="color: #28a745;">{{ row.name }}</h5>
+                                <p class="card-text text-muted">Category: {{ row.category }}</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Description: {{ row.description }}</li>
+                                <li class="list-group-item">Price Range: {{ row.price_range }}</li>
+                                <li class="list-group-item">Comments: {{ row.comments }}</li>
+                            </ul>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{ row.description }}</li>
-                            <li class="list-group-item">Price Range: {{ row.price_range }}</li>
-                            <li class="list-group-item">{{ row.comments }}</li>
-                        </ul>
                     </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p>No products available</p>
+            <div class="text-center my-5">
+                <h3 style="color: #203e58;">No products available</h3>
+                <p class="text-muted">Add some products to get started!</p>
+                <a href="{{ url_for('add_product') }}" class="btn btn-success">Add Product</a>
+            </div>
         {% endif %}
     </div>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-3" style="background-color: #343a40; color: white;">
+        <p>&copy; 2024 Grocery Good. All rights reserved.</p>
+    </footer>
 {% endblock %}
